@@ -1,0 +1,19 @@
+{
+  "name": "autorest",
+  "version": "1.0.0",
+  "description": "The API tester for Node",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsc -p src & node dist/index.js",
+    "rem": "rm dist/* -r -fo",
+    "comp": "tsc -p src",
+    "server": "node dist/index.js"
+  },
+  "author": "carloscdante",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "chalk": "^4.1.2"
+  }
+}
