@@ -31,3 +31,9 @@ export function MSG_RETURN_TYPE_SUCCESS(returnType: any, expectedReturnType: any
 export function MSG_INITIALIZE_ASSERT(method: String, host: String, port: Number, endpoint: String){
   return `${chalk.blue(`Initializing ${chalk.white(method.toUpperCase())} test on `)}${chalk.white(host)}:${chalk.white(port)}${chalk.white(endpoint)}...`
 }
+
+export function WELCOME_MESSAGE(){
+  return `${chalk.white('Welcome to ')}${chalk.blue.bold('autorest')}${chalk.white(
+    '! A folder named "autorest" has been created in your current working directory with sample configuration. If you want to know more about how it works, check the documentation at '
+  )}${chalk.blue.bold('https://autorest.net/docs')}.`
+}

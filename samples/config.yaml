@@ -1,0 +1,9 @@
+# This is an autorest sample configuration file.
+# You can declare hosts and ports for testing multiple APIS at the same time,
+# along with the file used for testing.
+
+hosts:
+  local-api: localhost:3000
+  auth-api: localhost:3001
+
+entrypoint: test.yaml
