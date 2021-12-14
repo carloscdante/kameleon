@@ -4,19 +4,28 @@ import { API, Call } from './api';
 import {MSG_ATTRIBUTE_FOUND, MSG_STATUS_EXPECTED,
         MSG_RETURN_TYPE_FAIL, MSG_STATUS_UNEXPECTED,
         MSG_ATTRIBUTE_NOT_FOUND, MSG_RETURN_TYPE_SUCCESS,
-        MSG_INITIALIZE_ASSERT} from '../misc/messages';
+        MSG_INITIALIZE_ASSERT, MSG_ATTRIBUTE_FOUND_WRONG_TYPE,
+        MSG_ATTRIBUTE_FOUND_CORRECT_TYPE} from '../misc/messages';
 
 async function check(response, endpoint, expectedValues){
   try {
     if(expectedValues.dataOptions){
-      let attrs = expectedValues.dataOptions.mustHaveAttribute.split(',');
-      attrs.forEach(attr => {
+      let attrs = expectedValues.dataOptions;
+      Object.keys(attrs).forEach(attr => {
         if(!(attr in response.data)){
           console.log(MSG_ATTRIBUTE_NOT_FOUND(attr));
         } else{
-          console.log(MSG_ATTRIBUTE_FOUND(attr));
-          console.log(`-----------------------------------------`);
-          console.log(`attribute value: ${response.data.attr}`);
+          if(typeof(response.data[attr]) !== attrs[attr]){
+            console.log(MSG_ATTRIBUTE_FOUND_CORRECT_TYPE(attr, attrs[attr], typeof(response.data[attr])));
+            console.log(`attribute value:`);
+            console.log(response.data[attr])
+            console.log(`-----------------------------------------`);
+          } else{
+            console.log(MSG_ATTRIBUTE_FOUND_WRONG_TYPE(attr, attrs[attr], typeof(response.data[attr])));
+            console.log(`attribute value:`);
+            console.log(response.data[attr])
+            console.log(`-----------------------------------------`);
+          }
         }
       })
     }

@@ -4,7 +4,7 @@ var path = require('path');
 
 import {WELCOME_MESSAGE} from '../misc/messages'
 
-const directory = path.join(__dirname, 'autorest');
+const directory = path.join(__dirname, '.kameleon');
 const fileNames = ['test']
 
 export async function checkConfig(){

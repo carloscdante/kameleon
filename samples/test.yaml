@@ -5,19 +5,19 @@
 host: localhost:3000
 
 routes:
-  /users:
+  /user/master/users:
     get:
       return_type: object
       status: 200
       ssl: true
       data_expected:
         realms: object
-    post:
-      return_type: object
-      status: 201
-      ssl: true
-      data_expected:
-        username: string
+  post:
+    return_type: object
+    status: 201
+    ssl: true
+    data_expected:
+      username: string
 
   /login:
     post:
@@ -32,4 +32,4 @@ routes:
         - username:string:admin
         - password:string:admin
       headers:
-        - Content-Type:application/x-www-form-urlencoded
+        Content-Type: application/x-www-form-urlencoded

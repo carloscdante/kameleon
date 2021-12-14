@@ -14,7 +14,7 @@ export async function parseBody(expr){
   let pName = spl[0];
   let pType = spl[1];
   let pValue = spl[2];
-  switch(ptype){
+  switch(pType){
     case 'string':
       pValue = pValue.toString();
       break;
@@ -36,6 +36,16 @@ export async function parseDataOptions(expr){
   let pName = spl[0];
   let pType = spl[1];
   ret[pName] = pType;
+
+  return ret;
+}
+
+export async function parseHeaders(expr){
+  let ret = {};
+  let spl = expr.split(':');
+  let pName = spl[0];
+  let pValue = spl[1];
+  ret[pName] = pValue;
 
   return ret;
 }
