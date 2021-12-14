@@ -8,14 +8,14 @@ const directory = path.join(__dirname, 'autorest');
 const fileNames = ['test']
 
 export async function checkConfig(){
-  console.log("Initializing autorest in your project folder...")
+  console.log("Initializing Kameleon in your project folder...")
   fs.exists(directory, (exists) => {
     if(!exists){
       fs.mkdir(directory, (err) => {
         if (err) {
             return console.error(err);
         }
-        let createdDir = path.join(__dirname, '/./autorest/');
+        let createdDir = path.join(__dirname, '/./.kameleon/');
 
         fileNames.forEach(file => {
           let content = ''

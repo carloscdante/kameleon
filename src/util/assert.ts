@@ -6,11 +6,9 @@ import * as yamlActions from '../modules/parse_config';
 
 var fs = require('fs');
 
-const configPath = './autorest'
+const configPath = './autorest';
 
 export async function resolve(){
-  let parsedYaml = '';
-
   fs.exists(configPath, (exists) => {
     if(!exists){
       console.log('Error! No test directory detected in root folder. Did you run "autorest init"?');
@@ -18,8 +16,26 @@ export async function resolve(){
     }
     fs.readFile(`${configPath}/config.yml`, 'utf-8', async (err, data) => {
       try{
-        parsedYaml = await yamlActions.parse(data);
-        
+        let host = '';
+        let port = 0;
+        const parsedYaml = await yamlActions.parse(data);
+        let spl = parsedYaml['host'].split(':');
+        host = spl[0];
+        port = parseInt(spl[1]);
+        Object.keys(parsedYaml.routes).forEach(route => {
+          let requestObjectByRoute = parsedYaml['routes'][route];
+          Object.keys(requestObjectByRoute).forEach(method => {
+            let returnType = method['return_type'];
+            let status = method['status'];
+            let https = method['ssl'];
+            let dataOptions = method['data_expected'] ? await parseDataOptions(method['data_expected']) : '';
+            let parameters = method['parameters'] ? method['parameters'] : '';
+            let headers = method['headers'] ? method['headers'] : '';
+            let body = method['body'] ? await parseBody(method['body']) : '';
+              test(host, port, method, route, returnType, status, https, parameters,
+              headers, body, dataOptions);
+          })
+        })
       }catch(err){
         console.log('Error reading file! Aborting!');
         process.exit(0);
@@ -37,7 +53,11 @@ https: boolean, parameters?: Object, headers?: Object, body?: Object, dataOption
     endpoint,
     returnType,
     status,
-    https
+    https,
+    parameters,
+    headers,
+    body,
+    dataOptions
   );
   return assertTool.assert(api, request);
 }
@@ -49,7 +69,7 @@ const request = new autorest.Call(
   api,
   'get',
   '/realms',
-  'object',
+  'array',
   200,
   false
 );
