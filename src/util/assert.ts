@@ -7,7 +7,7 @@ import * as yamlActions from '../modules/parse_config';
 var fs = require('fs');
 var path = require('path');
 
-const configPath = path.join(__dirname, '.kameleon');
+const configPath = path.join(process.cwd(), '.kameleon');
 
 export async function resolve(file?){
   let pathToFile = '';
@@ -18,7 +18,7 @@ export async function resolve(file?){
   }
   fs.exists(configPath, (exists) => {
     if(!exists){
-      console.log('Error! No test directory detected in root folder. Did you run "autorest init"?');
+      console.log('Error! No test directory detected in root folder. Did you run "kameleon init"?');
       process.exit(0);
     }
     fs.readFile(pathToFile, 'utf-8', async (err, data) => {
@@ -31,10 +31,8 @@ export async function resolve(file?){
         port = parseInt(spl[1]);
         Object.keys(parsedYaml.routes).forEach(async route => {
           let requestObjectByRoute = parsedYaml['routes'][route];
-          console.log(route);
           Object.keys(requestObjectByRoute).forEach(async method => {
             let requestObjectByMethod = parsedYaml['routes'][route][method];
-            console.log(requestObjectByMethod)
             let returnType = requestObjectByMethod['return_type'];
             let status = parseInt(requestObjectByMethod['status']);
             let https = requestObjectByMethod['ssl'];
@@ -42,7 +40,7 @@ export async function resolve(file?){
             let parameters = requestObjectByMethod['parameters'] ? requestObjectByMethod['parameters'] : '';
             let headers = requestObjectByMethod['headers'];
             let body = requestObjectByMethod['body'] ? await yamlActions.parseBody(requestObjectByMethod['body']) : '';
-              test(host, port, method, route, returnType, status, https, parameters,
+              await test(host, port, method, route, returnType, status, https, parameters,
               headers, body, dataOptions);
           })
         })
@@ -85,5 +83,3 @@ https: boolean, parameters?: Object, headers?: Object, body?: Object, dataOption
 // );
 //
 // assertTool.assert(api, request);
-
-resolve();

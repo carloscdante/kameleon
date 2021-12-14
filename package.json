@@ -11,7 +11,7 @@
     "server": "node dist/index.js"
   },
   "author": "carloscdante",
-  "license": "GPL-3.0-or-later",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.24.0",
     "chalk": "^4.1.2",

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const yargs = require('yargs');
-let pack = require('./pack.json')
+let pack = require('../package.json');
 
 import { init } from './modules/init';
 import * as Suite from './util/assert';
@@ -24,18 +24,12 @@ const argv = yargs
     .command('$0', 'Kameleon CLI', () => {}, (argv) => {
         yargs.showHelp()
     })
-    .option('version', {
-        alias: 'v',
-        description: 'Show the version'
-    })
     .help()
     .alias('help', 'h')
+    .version()
+    .alias('version', 'v')
+    .describe('version', 'Show version information')
     .argv;
-
-    if(argv.version){
-        let version = pack.version
-        //console.log('Yankit v' + version)
-    }
 
     if (argv._.includes('run')) {
         const file = argv.file;

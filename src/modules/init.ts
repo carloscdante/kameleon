@@ -4,7 +4,7 @@ var path = require('path');
 
 import {WELCOME_MESSAGE} from '../misc/messages'
 
-const directory = path.join(__dirname, '.kameleon');
+const directory = path.join(process.cwd(), '.kameleon');
 const fileNames = ['test']
 
 export async function checkConfig(){
@@ -15,7 +15,7 @@ export async function checkConfig(){
         if (err) {
             return console.error(err);
         }
-        let createdDir = path.join(__dirname, '/./.kameleon/');
+        let createdDir = path.join(process.cwd(), '/./.kameleon/');
 
         fileNames.forEach(file => {
           let content = ''
@@ -48,5 +48,3 @@ export async function init(){
     console.log(WELCOME_MESSAGE());
   }catch(err){console.log(err)}
 }
-
-init();

@@ -8,24 +8,26 @@ export async function parse(file){
   return parsed;
 }
 
-export async function parseBody(expr){
+export async function parseBody(arr){
   let ret = {};
-  let spl = expr.split(':');
-  let pName = spl[0];
-  let pType = spl[1];
-  let pValue = spl[2];
-  switch(pType){
-    case 'string':
-      pValue = pValue.toString();
-      break;
-    case 'number':
-      pValue = parseInt(pValue);
-      break;
-    case 'boolean':
-      pValue = !!pValue;
-      break;
-  }
-  ret[pName] = pValue;
+  arr.forEach(expr => {
+    let spl = expr.split(':');
+    let pName = spl[0];
+    let pType = spl[1];
+    let pValue = spl[2];
+    switch(pType){
+      case 'string':
+        pValue = pValue.toString();
+        break;
+      case 'number':
+        pValue = parseInt(pValue);
+        break;
+      case 'boolean':
+        pValue = !!pValue;
+        break;
+    }
+    ret[pName] = pValue;
+  })
 
   return ret;
 }
