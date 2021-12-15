@@ -20,9 +20,10 @@ export class Call {
   public expectedStatus: number;
   public https: boolean;
   public isValid: boolean;
+  public description?: String
 
   constructor(api: API, method: String, endpoint: String, expectedReturnType: String, expectedStatus: number, https: boolean,
-    parameters?: Object, headers?: Object, body?: Object, dataOptions?: Object){
+    parameters?: Object, headers?: Object, body?: Object, dataOptions?: Object, description?: String){
     this.api = api;
     this.method = method;
     this.endpoint = endpoint;
@@ -33,5 +34,6 @@ export class Call {
     this.expectedStatus = expectedStatus;
     this.expectedReturnType = expectedReturnType;
     this.https = https;
+    this.description = description;
   }
 }

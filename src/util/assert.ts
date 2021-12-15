@@ -34,6 +34,7 @@ export async function resolve(file?){
           Object.keys(requestObjectByRoute).forEach(async method => {
             let requestObjectByMethod = parsedYaml['routes'][route][method];
             let returnType = requestObjectByMethod['return_type'];
+            let description = requestObjectByMethod['description'];
             let status = parseInt(requestObjectByMethod['status']);
             let https = requestObjectByMethod['ssl'];
             let dataOptions = requestObjectByMethod['data_expected'];
@@ -41,7 +42,7 @@ export async function resolve(file?){
             let headers = requestObjectByMethod['headers'];
             let body = requestObjectByMethod['body'] ? await yamlActions.parseBody(requestObjectByMethod['body']) : '';
               await test(host, port, method, route, returnType, status, https, parameters,
-              headers, body, dataOptions);
+              headers, body, dataOptions, description);
           })
         })
       }catch(err){
@@ -53,7 +54,7 @@ export async function resolve(file?){
 }
 
 export async function test(host: String, port: number, method: String, endpoint: String, returnType: String, status: number,
-https: boolean, parameters?: Object, headers?: Object, body?: Object, dataOptions?: Object){
+https: boolean, parameters?: Object, headers?: Object, body?: Object, dataOptions?: Object, description?: String){
   const api = new autorest.API(host, port);
   const request = new autorest.Call(
     api,
@@ -65,7 +66,8 @@ https: boolean, parameters?: Object, headers?: Object, body?: Object, dataOption
     parameters,
     headers,
     body,
-    dataOptions
+    dataOptions,
+    description
   );
   return assertTool.assert(api, request);
 }
