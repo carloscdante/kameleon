@@ -20,5 +20,8 @@
   },
   "bin": {
     "kameleon": "./dist/index.js"
+  },
+  "devDependencies": {
+    "husky": "^7.0.4"
   }
 }
