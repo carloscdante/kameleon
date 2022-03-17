@@ -1,7 +1,7 @@
 {
-  "name": "autorest",
+  "name": "kameleon",
   "version": "0.1.1",
-  "description": "The API tester for Node",
+  "description": "API testing tool and description language. Built on YAML. Compiles to OpenAPI.",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
