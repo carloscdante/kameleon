@@ -1,6 +1,6 @@
 {
   "name": "kameleon",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "API testing tool and description language. Built on YAML. Compiles to OpenAPI.",
   "main": "dist/index.js",
   "scripts": {
@@ -15,6 +15,7 @@
   "dependencies": {
     "axios": "^0.24.0",
     "chalk": "^4.1.2",
+    "figlet": "^1.5.2",
     "yaml": "^1.10.2",
     "yargs": "^17.3.0"
   },

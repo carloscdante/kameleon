@@ -18,10 +18,16 @@ export async function send(api: API, call: Call, callback: Handler){
   const https = call.https;
 
   let protocol = https ? 'https' : 'http';
+  let url = '';
+  if(port) {
+    url = `${protocol}://${host}:${port}${endpoint}`;
+  } else{
+    url = `${protocol}://${host}${endpoint}`;
+  }
 
   axios({
     method: method,
-    url: `${protocol}://${host}:${port}${endpoint}`,
+    url: url,
     headers: headers,
     params: parameters,
     data: body

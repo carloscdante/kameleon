@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const figlet = require('figlet');
 
 export function MSG_ATTRIBUTE_NOT_FOUND(attr: String, description: String){
   return `${chalk.red(`❌ Failing:
@@ -79,11 +80,15 @@ ${chalk.green.bold(`corresponding to expected return type`)} ${chalk.blue.bold(e
 }
 
 export function MSG_INITIALIZE_ASSERT(method: String, host: String, port: Number, endpoint: String){
-  return `${chalk.blue(`Initializing ${chalk.white(method.toUpperCase())} test on `)}${chalk.white(host)}:${chalk.white(port)}${chalk.white(endpoint)}...`
+  if(port) return `${chalk.blue(`Initializing ${chalk.white(method.toUpperCase())} test on `)}${chalk.white(host)}:${chalk.white(port)}${chalk.white(endpoint)}...` 
+  return `${chalk.blue(`Initializing ${chalk.white(method.toUpperCase())} test on `)}${chalk.white(host)}${chalk.white(endpoint)}...`
 }
 
 export function WELCOME_MESSAGE(){
-  return `${chalk.white('Welcome to ')}${chalk.blue.bold('Kameleon')}${chalk.white(
+  return `${figlet.textSync('Kameleon', {
+    whitespaceBreak: true
+})}
+${chalk.white('Welcome to ')}${chalk.blue.bold('Kameleon')}${chalk.white(
     '! A folder named "Kameleon" has been created in your current working directory with sample configuration. If you want to know more about how it works, check the documentation at '
   )}${chalk.blue.bold('https://kameleon-project.org/docs')}.`
 }
