@@ -156,7 +156,7 @@ When you initialize a Kameleon configuration, it creates a little test for you t
 
 `kameleon run`
 
-The desired output is:
+The desired output for the command is:
 
 ```
 ------------------------------------
