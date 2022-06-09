@@ -22,6 +22,12 @@ Install kameleon globally with Yarn.
 
 ``yarn global add kameleon-tools``
 
+### Check your version
+
+Check if your version is the latest one with the kameleon-cli.
+
+`kameleon -version`
+
 ## Specification
 
 A quick start guide on how to write kameleon tests/general usage is specified in [the docs]().
@@ -142,4 +148,32 @@ You can also add request headers with the **headers** property. You declare head
 ```yaml
 headers:
   Content-Type: application/x-www-form-urlencoded
+```
+
+## Running a test batch
+
+When you initialize a Kameleon configuration, it creates a little test for you to see if Kameleon is working properly. After init, run the test batch.
+
+`kameleon run`
+
+The desired output is:
+
+```
+------------------------------------
+undefined
+
+  
+✓ Passing:
+
+status 200
+corresponding to expected status 200
+
+
+✓ Passing:
+
+returned type string
+corresponding to expected return type string
+
+
+------------------------------------
 ```
