@@ -25,5 +25,3 @@ Install kameleon globally with Yarn.
 ## Specification
 
 A quick start guide on how to write kameleon tests/general usage is specified in [the docs](https://carloscdante.github.io/kameleon/).
-
-If you want to know more, you can read the [Kameleon spec]().

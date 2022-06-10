@@ -32,8 +32,6 @@ Check if your version is the latest one with the kameleon-cli.
 
 A quick start guide on how to write kameleon tests/general usage is specified in [the docs]().
 
-If you want to know more, you can read the [Kameleon spec]().
-
 ## Quick start
 
 Kameleon tests are written in YAML, to initialize a test setting, run the init command.
