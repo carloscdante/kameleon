@@ -52,6 +52,24 @@ ${chalk.green.bold(`not corresponding to expected status`)} ${chalk.blue.bold(ex
 `
 }
 
+export function MSG_RESPONSE_TIME_FAIL(timeLimit: String, responseTime: String) {
+  return `${chalk.red(`❌ Failing:
+
+  response time too slow,`)} ${chalk.blue.bold(responseTime)}ms
+  ${chalk.green.bold(`slower than`)} ${chalk.blue.bold(timeLimit)}ms
+  
+  `
+}
+
+export function MSG_RESPONSE_TIME_SUCCESS(timeLimit: String, responseTime: String) {
+  return `${chalk.green(`✓ Passing:
+
+  response time is OK,`)} ${chalk.blue.bold(responseTime)}ms
+  ${chalk.green.bold(`faster than your time limit of`)} ${chalk.blue.bold(timeLimit)}ms
+  
+  `
+}
+
 export function MSG_STATUS_EXPECTED(status: Number, expectedStatus: Number, description: String){
   return `${chalk.green(`✓ Passing:
 

@@ -5,11 +5,17 @@ import {MSG_ATTRIBUTE_FOUND, MSG_STATUS_EXPECTED,
         MSG_RETURN_TYPE_FAIL, MSG_STATUS_UNEXPECTED,
         MSG_ATTRIBUTE_NOT_FOUND, MSG_RETURN_TYPE_SUCCESS,
         MSG_INITIALIZE_ASSERT, MSG_ATTRIBUTE_FOUND_WRONG_TYPE,
-        MSG_ATTRIBUTE_FOUND_CORRECT_TYPE, MSG_SHOW_DESCRIPTION} from '../misc/messages';
+        MSG_ATTRIBUTE_FOUND_CORRECT_TYPE, MSG_SHOW_DESCRIPTION,
+        MSG_RESPONSE_TIME_FAIL, MSG_RESPONSE_TIME_SUCCESS} from '../misc/messages';
 
 async function check(response, endpoint, expectedValues, description){
   try {
     console.log(MSG_SHOW_DESCRIPTION(description));
+    if(parseInt(expectedValues.timeLimit) < response.responseTime) {
+      console.log(MSG_RESPONSE_TIME_FAIL(expectedValues.timeLimit, response.responseTime));
+    } else {
+      console.log(MSG_RESPONSE_TIME_SUCCESS(expectedValues.timeLimit, response.responseTime));
+    }
     if(expectedValues.dataOptions){
       let attrs = expectedValues.dataOptions;
       Object.keys(attrs).forEach(attr => {
@@ -53,10 +59,13 @@ export async function assert(api: API, call: Call) {
   console.log('------------------------------------')
   let expectedValues = {
     'returns': call.expectedReturnType,
-    'status': call.expectedStatus
+    'status': call.expectedStatus,
   }
   if(call.dataOptions){
     expectedValues['dataOptions'] = call.dataOptions;
+  }
+  if(call.timeLimit) {
+    expectedValues['timeLimit'] = call.timeLimit;
   }
   const res = await request.send(api, call, async response => {
     await check(response, call.endpoint, expectedValues, call.description);

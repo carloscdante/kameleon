@@ -37,12 +37,13 @@ export async function resolve(file?){
             let description = requestObjectByMethod['description'];
             let status = parseInt(requestObjectByMethod['status']);
             let https = requestObjectByMethod['ssl'];
+            let timeLimit = requestObjectByMethod['time_limit'];
             let dataOptions = requestObjectByMethod['data_expected'];
             let parameters = requestObjectByMethod['parameters'] ? requestObjectByMethod['parameters'] : '';
             let headers = requestObjectByMethod['headers'];
             let body = requestObjectByMethod['body'] ? await yamlActions.parseBody(requestObjectByMethod['body']) : '';
               await test(host, port, method, route, returnType, status, https, parameters,
-              headers, body, dataOptions, description);
+              headers, body, dataOptions, description, timeLimit);
           })
         })
       }catch(err){
@@ -54,7 +55,7 @@ export async function resolve(file?){
 }
 
 export async function test(host: String, port: number, method: String, endpoint: String, returnType: String, status: number,
-https: boolean, parameters?: Object, headers?: Object, body?: Object, dataOptions?: Object, description?: String){
+https: boolean, parameters?: Object, headers?: Object, body?: Object, dataOptions?: Object, description?: String, timeLimit?: String){
   const api = new autorest.API(host, port);
   const request = new autorest.Call(
     api,
@@ -67,7 +68,8 @@ https: boolean, parameters?: Object, headers?: Object, body?: Object, dataOption
     headers,
     body,
     dataOptions,
-    description
+    description,
+    timeLimit,
   );
   return assertTool.assert(api, request);
 }
