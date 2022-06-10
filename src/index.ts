@@ -14,6 +14,13 @@ const argv = yargs
             type: 'string',
         }
     })
+    .command('watch', 'Manually monitor a series of requests on an API via a specified file.', {
+        file: {
+            description: 'The configuration file for testing. Defaults to test.yml',
+            alias: 'f',
+            type: 'string',
+        }
+    })
     .command('gendoc', 'Generates documentation from a kameleon file', {
         file: {
             description: 'The configuration file for testing (used as an API description language). Defaults to test.yml',
@@ -35,6 +42,12 @@ const argv = yargs
         const file = argv.file;
 
         Suite.resolve(file);
+    }
+
+    if (argv._.includes('watch')) {
+        const file = argv.file;
+
+        Suite.resolve('watch', file);
     }
 
     if (argv._.includes('gendoc')) {

@@ -9,7 +9,7 @@ var path = require('path');
 
 const configPath = path.join(process.cwd(), '.kameleon');
 
-export async function resolve(file?){
+export async function resolve(mode?, file?){
   let pathToFile = '';
   if(file){
     pathToFile = file;
@@ -26,24 +26,25 @@ export async function resolve(file?){
         let host = '';
         let port = 0;
         const parsedYaml = await yamlActions.parse(data);
-        let spl = parsedYaml['host'].split(':');
+        const spl = parsedYaml['host'].split(':');
+        const delay = parsedYaml['delay'];
         host = spl[0];
         port = parseInt(spl[1]);
         Object.keys(parsedYaml.routes).forEach(async route => {
           let requestObjectByRoute = parsedYaml['routes'][route];
           Object.keys(requestObjectByRoute).forEach(async method => {
-            let requestObjectByMethod = parsedYaml['routes'][route][method];
-            let returnType = requestObjectByMethod['return_type'];
-            let description = requestObjectByMethod['description'];
-            let status = parseInt(requestObjectByMethod['status']);
-            let https = requestObjectByMethod['ssl'];
-            let timeLimit = requestObjectByMethod['time_limit'];
-            let dataOptions = requestObjectByMethod['data_expected'];
-            let parameters = requestObjectByMethod['parameters'] ? requestObjectByMethod['parameters'] : '';
-            let headers = requestObjectByMethod['headers'];
-            let body = requestObjectByMethod['body'] ? await yamlActions.parseBody(requestObjectByMethod['body']) : '';
+            const requestObjectByMethod = parsedYaml['routes'][route][method];
+            const returnType = requestObjectByMethod['return_type'];
+            const description = requestObjectByMethod['description'];
+            const status = parseInt(requestObjectByMethod['status']);
+            const https = requestObjectByMethod['ssl'];
+            const timeLimit = requestObjectByMethod['time_limit'];
+            const dataOptions = requestObjectByMethod['data_expected'];
+            const parameters = requestObjectByMethod['parameters'] ? requestObjectByMethod['parameters'] : '';
+            const headers = requestObjectByMethod['headers'];
+            const body = requestObjectByMethod['body'] ? await yamlActions.parseBody(requestObjectByMethod['body']) : '';
               await test(host, port, method, route, returnType, status, https, parameters,
-              headers, body, dataOptions, description, timeLimit);
+              headers, body, dataOptions, description, timeLimit, delay);
           })
         })
       }catch(err){
@@ -55,7 +56,8 @@ export async function resolve(file?){
 }
 
 export async function test(host: String, port: number, method: String, endpoint: String, returnType: String, status: number,
-https: boolean, parameters?: Object, headers?: Object, body?: Object, dataOptions?: Object, description?: String, timeLimit?: String){
+https: boolean, parameters?: Object, headers?: Object, body?: Object, dataOptions?: Object, description?: String, timeLimit?: String,
+delay?: number,){
   const api = new autorest.API(host, port);
   const request = new autorest.Call(
     api,
@@ -71,7 +73,7 @@ https: boolean, parameters?: Object, headers?: Object, body?: Object, dataOption
     description,
     timeLimit,
   );
-  return assertTool.assert(api, request);
+  return assertTool.assert(api, request, delay);
 }
 
 // const conf = await yamlActions.parse(configFile);

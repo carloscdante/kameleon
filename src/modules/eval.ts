@@ -54,7 +54,7 @@ async function check(response, endpoint, expectedValues, description){
 /**
  * assert() runs an API call, asserts the values and checks for errors.
  */
-export async function assert(api: API, call: Call) {
+export async function assert(api: API, call: Call, delay?: number) {
   console.log(MSG_INITIALIZE_ASSERT(call.method, api.host, api.port, call.endpoint));
   console.log('------------------------------------')
   let expectedValues = {
@@ -68,8 +68,16 @@ export async function assert(api: API, call: Call) {
     expectedValues['timeLimit'] = call.timeLimit;
   }
   const res = await request.send(api, call, async response => {
-    await check(response, call.endpoint, expectedValues, call.description);
-    console.log('------------------------------------')
-    return response;
+    if(delay) {
+      setTimeout(async () => {
+        await check(response, call.endpoint, expectedValues, call.description);
+        console.log('------------------------------------')
+        return response;
+      }, delay)
+    } else {
+      await check(response, call.endpoint, expectedValues, call.description);
+      console.log('------------------------------------')
+      return response;
+    }
   });
 }
