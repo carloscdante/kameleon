@@ -168,8 +168,8 @@ The desired output for the command is:
 
 ✓ Passing:
 
-  response time is OK, 879ms
-  faster than your time limit of 5000ms
+response time is OK, 879ms
+faster than your time limit of 5000ms
   
   
 ✓ Passing:
