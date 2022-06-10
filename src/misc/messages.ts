@@ -108,5 +108,5 @@ export function WELCOME_MESSAGE(){
 })}
 ${chalk.white('Welcome to ')}${chalk.blue.bold('Kameleon')}${chalk.white(
     '! A folder named "Kameleon" has been created in your current working directory with sample configuration. If you want to know more about how it works, check the documentation at '
-  )}${chalk.blue.bold('https://kameleon-project.org/docs')}.`
+  )}${chalk.blue.bold('https://carloscdante.github.io/kameleon')}.`
 }
