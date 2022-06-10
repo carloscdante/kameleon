@@ -1,6 +1,6 @@
 {
   "name": "kameleon-tools",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "API testing tool and description language. Built on YAML.",
   "main": "dist/index.js",
   "scripts": {
@@ -19,7 +19,6 @@
     "yaml": "^1.10.2",
     "yargs": "^17.3.0"
   },
-  "files": ["/samples"],
   "bin": {
     "kameleon": "./dist/index.js"
   },
