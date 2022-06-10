@@ -164,11 +164,13 @@ When you initialize a Kameleon configuration, it creates a little test for you t
 The desired output for the command is:
 
 ```
+Initializing GET test on google.com/...
 ------------------------------------
 
+  
 ✓ Passing:
 
-response time is OK, 879ms
+response time is OK, 953ms
 faster than your time limit of 5000ms
   
   
