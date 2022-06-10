@@ -109,6 +109,7 @@ Inside routes, we have some more properties.
       return_type: object
       status: 201
       ssl: true
+      time_limit: 500
       data_expected:
         username: string
       body:
@@ -127,6 +128,10 @@ For websites that support SSL (https), it's good practice to set **ssl** to true
 ##### Expecting response data
 
 Kameleon also can analyze response data and expect some response values with **data_expected**. It scans for response body parameters and check its types.
+
+##### Tracking response times
+
+You can set a **time_limit** for the request to complete. If it doesn't complete in the interval you set, the test fails. Time is measured in milliseconds.
 
 ##### Body Object
 
@@ -160,8 +165,12 @@ The desired output for the command is:
 
 ```
 ------------------------------------
-undefined
 
+✓ Passing:
+
+  response time is OK, 879ms
+  faster than your time limit of 5000ms
+  
   
 ✓ Passing:
 
