@@ -2,34 +2,13 @@
 # Here is where you specify your API routes and conditions,
 # also, it is the file parsed by Kameleon for the actual testing.
 
-host: localhost:3000
+host: google.com
 
 routes:
-  /user/master/users:
+  /:
     get:
-      return_type: object
+      description: "if kameleon works this should be working too!"
+      return_type: string
       status: 200
       ssl: true
-      data_expected:
-        realms: object
-  post:
-    return_type: object
-    status: 201
-    ssl: true
-    data_expected:
-      username: string
-
-  /login:
-    post:
-      return_type: object
-      status: 200
-      ssl: true
-      data_expected:
-        - access_token:jwt
-        - refresh_token:jwt
-        - roles:object
-      body:
-        - username:string:admin
-        - password:string:admin
-      headers:
-        Content-Type: application/x-www-form-urlencoded
+      time_limit: 5000

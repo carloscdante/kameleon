@@ -6,7 +6,6 @@ import {WELCOME_MESSAGE} from '../misc/messages'
 
 const directory = path.join(process.cwd(), '.kameleon');
 const fileNames = ['test'];
-const testSample = fs.readFileSync('../../samples/config.yaml');
 
 export async function checkConfig(){
   console.log("Initializing Kameleon in your project folder...")
