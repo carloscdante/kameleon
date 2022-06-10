@@ -1,7 +1,7 @@
 {
   "name": "kameleon-tools",
   "version": "0.1.3",
-  "description": "API testing tool and description language. Built on YAML. Compiles to OpenAPI.",
+  "description": "API testing tool and description language. Built on YAML.",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

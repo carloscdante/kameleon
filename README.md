@@ -1,6 +1,6 @@
 ![](https://i.imgur.com/OCPGagi.png)
 
-# Describe and automatically test your REST APIs via bite-sized YAML description files. Compiles to OpenAPI.
+# Describe and automatically test your REST APIs via bite-sized YAML description files.
 
 __Note: Kameleon is a prototype/work in progress. Features may not work as intended.__
 
