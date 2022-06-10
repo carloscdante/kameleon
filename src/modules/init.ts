@@ -5,7 +5,8 @@ var path = require('path');
 import {WELCOME_MESSAGE} from '../misc/messages'
 
 const directory = path.join(process.cwd(), '.kameleon');
-const fileNames = ['test']
+const fileNames = ['test'];
+const testSample = fs.readFileSync('../../samples/config.yaml');
 
 export async function checkConfig(){
   console.log("Initializing Kameleon in your project folder...")
@@ -24,7 +25,7 @@ export async function checkConfig(){
               content = 'CONFIG FILE'
               break;
             case 'test':
-              content = 'TEST FILE'
+              content = '# Welcome to Kameleon! Check the documentation to learn how to write test files.'
               break;
           }
           fs.open(`${createdDir}${file}.yml`, 'wx', async(err, desc) => {
